@@ -20,4 +20,8 @@ export class CourseListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public loadMore() {
+    console.log("Load more!");
+  }
+
 }
