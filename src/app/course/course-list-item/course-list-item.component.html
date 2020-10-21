@@ -1,4 +1,10 @@
-<p>Course list item and obligatory ng-for learning material. Here come a buttons:</p>
-<div class="moved">
-    <alp-course-item-management-panel></alp-course-item-management-panel>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{course.title}}</h4>
+        <h5 class="card-subtitle"><span class="fas fa-clock"></span> {{course.duration}} min. <span class="fas fa-date"></span> {{course.creationDate | date}}</h5>
+        <p class="card-text">{{course.description}}</p>
+        <alp-course-item-management-panel></alp-course-item-management-panel>
+    </div>
 </div>
+
+

@@ -1,5 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
-.moved
-{
-    padding-left: 20px
+alp-root {
+    display: flex;
+}
+alp-header, alp-footer {
+    background-color: #303240;
+    display: flex;
+    align-content: center;
+    height: 60px;
+    color: white;
+}
+alp-user-header {
+    align-content: right;
+}
+.logo {
+    font-size: 18px;
+    font-family: "SourceSansPro-Bold";
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+alp-course-search {
+    display: flex;
+}
+alp-add-course {
+    display: flex;
+    justify-content: right;
+}
+alp-footer {
+    justify-content: right;
+    padding: 20px;
+    align-self: flex-end;
 }

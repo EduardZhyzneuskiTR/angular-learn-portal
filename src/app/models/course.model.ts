@@ -1,4 +1,4 @@
-interface ICourse {
+export interface ICourse {
     id: number;
     title: string;
     creationDate: Date;
@@ -6,7 +6,7 @@ interface ICourse {
     description: string;
 }
 
-class Course implements ICourse {
+export class Course implements ICourse {
     get id() : number {
         return this._id;
     }

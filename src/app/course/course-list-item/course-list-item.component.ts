@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ICourse } from 'src/app/models/course.model';
 
 @Component({
   selector: 'alp-course-list-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-list-item.component.css']
 })
 export class CourseListItemComponent implements OnInit {
+  @Input() public course: ICourse;
 
   constructor() { }
 
