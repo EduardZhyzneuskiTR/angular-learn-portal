@@ -8,12 +8,13 @@ import { CourseItemManagementPanelComponent } from './course-item-management-pan
 import { CourseEditComponent } from './course-edit/course-edit.component';
 import { CourseEditFormComponent } from './course-edit-form/course-edit-form.component';
 import { CourseManagementPanelComponent } from './course-management-panel/course-management-panel.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [CourseListComponent, CourseSearchComponent, AddCourseComponent, CourseListItemComponent, CourseItemManagementPanelComponent, CourseEditComponent, CourseEditFormComponent, CourseManagementPanelComponent],
   exports: [ CourseListComponent, CourseEditComponent ],
-  imports: [ CommonModule ]
+  imports: [ CommonModule, FormsModule ]
 })
 export class CourseModule { }
