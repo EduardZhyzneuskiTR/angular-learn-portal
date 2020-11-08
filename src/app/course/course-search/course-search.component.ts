@@ -15,7 +15,6 @@ export class CourseSearchComponent implements OnInit {
   }
 
   public onClick() {
-    console.log("Click");
-    console.log(this.searchText);
+    console.log("Searching for " + this.searchText);
   }
 }
