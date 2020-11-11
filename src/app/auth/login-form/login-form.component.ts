@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'alp-login-form',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor() { }
+  public email: string;
+  public password: string;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  public logIn(email: string, password: string) {
+    this.authService.logIn(email, password);
+  }
 }

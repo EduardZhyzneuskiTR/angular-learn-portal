@@ -1,1 +1,15 @@
-<p>This is component for login form.</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <label for="email-input" class="col-2">Email</label>
+            <input id="email-input" class="col-10 form-control" [(ngModel)]="email">
+        </div>
+        <div class="row">
+            <label for="password-input" class="col-2">Password</label>
+            <input id="password-input" class="col-10 form-control" type="password" [(ngModel)]="password">
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-success" (click)="logIn(email, password)">Log in</button>
+        </div>
+    </div>
+</div>

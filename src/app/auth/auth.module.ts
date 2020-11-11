@@ -4,12 +4,13 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { UserProfileLinkComponent } from './user-profile-link/user-profile-link.component';
 import { LogOutComponent } from './log-out/log-out.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [LoginFormComponent, UserHeaderComponent, UserProfileLinkComponent, LogOutComponent],
   exports: [ LoginFormComponent, UserHeaderComponent ],
-  imports: [ CommonModule ]
+  imports: [ CommonModule, FormsModule ]
 })
 export class AuthModule { }
