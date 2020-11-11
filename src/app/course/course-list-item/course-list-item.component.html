@@ -1,7 +1,7 @@
 <div class="card">
-    <div class="card-body">
-        <h4 class="card-title">{{course.title}}</h4>
-        <h5 class="card-subtitle"><span class="fas fa-clock"></span> {{course.duration}} min. <span class="fas fa-date"></span> {{course.creationDate | date}}</h5>
+    <div class="card-body" [alpCreationDateStyling]="course.creationDate">
+        <h4 class="card-title">{{course.title | uppercase}}</h4>
+        <h5 class="card-subtitle"><span class="fas fa-clock"></span> {{course.duration | duration}}. <span class="fas fa-date"></span> {{course.creationDate | date}}</h5>
         <p class="card-text">{{course.description}}</p>
         <alp-course-item-management-panel></alp-course-item-management-panel>
     </div>

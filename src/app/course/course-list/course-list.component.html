@@ -2,5 +2,6 @@
     <div class="card"><alp-course-search></alp-course-search></div>
     <alp-add-course></alp-add-course>
     <alp-course-list-item *ngFor="let course of courses" [course]="course"></alp-course-list-item>
+    <span *ngIf="courses.length == 0">No courses. Here is link: </span>
     <a href="#" id="load-more" (click)="loadMore()">Load more</a>
 </div>
