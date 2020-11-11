@@ -1,10 +1,10 @@
-interface IUser {
+export interface IUser {
     id: number;
     firstName: string;
     secondName: string;
 }
 
-class User implements IUser {
+export class User implements IUser {
     get id(): number {
         return this._id;
     }
