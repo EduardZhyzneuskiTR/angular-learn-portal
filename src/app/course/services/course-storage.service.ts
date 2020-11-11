@@ -33,7 +33,7 @@ export class CourseStorageService {
    public removeItem(id: number) {
      let index = this.courses.findIndex(c => c.id == id);
      if (index >= 0) {
-      this.courses = this.courses.splice(index);
+      this.courses.splice(index, 1);
      }
    }
 }
