@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseEdit } from 'src/app/models/course-edit.model';
 
 @Component({
   selector: 'alp-course-edit-form',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseEditFormComponent implements OnInit {
 
+  courseEditModel: CourseEdit = new CourseEdit();
+  
   constructor() { }
 
   ngOnInit(): void {

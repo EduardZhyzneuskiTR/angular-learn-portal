@@ -1,1 +1,14 @@
-<p>Here is course edit form will be placed.</p>
+<div class="row">
+    <label for="title-edit">Title</label>
+    <input id="title-edit" [(ngModel)]="courseEditModel.title" class="form-control"/>
+</div>
+<div class="row">
+    <label for="description-edit">Description</label>
+    <input id="description-edit" type="text-area" [(ngModel)]="courseEditModel.description" class="form-control"/>
+</div>
+<div class="row">
+    <label for="creation-date-edit">Date</label>
+    <input id="creation-date-edit" type="text-area" [(ngModel)]="courseEditModel.creationDate" class="form-control"/>
+</div>
+<alp-course-edit-duration (duration) = "courseEditModel.duration = $event"></alp-course-edit-duration>
+<alp-course-edit-authors (authors) = "courseEditModel.authors = $event"></alp-course-edit-authors>
