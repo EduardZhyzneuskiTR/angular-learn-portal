@@ -1,5 +1,5 @@
 <div class="row">
     <label for="duration-edit">Duration</label>
-    <span>&nbsp;{{ showedDuration | duration }}</span>
-    <input id="duration-edit" (change)="changed($event)" class="form-control"/>
+    <span>&nbsp;{{ duration | duration }}</span>
+    <input id="duration-edit" [value]="duration" (change)="changed($event)" class="form-control"/>
 </div>

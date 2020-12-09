@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CourseEdit } from 'src/app/models/course-edit.model';
 
 @Component({
@@ -8,11 +8,15 @@ import { CourseEdit } from 'src/app/models/course-edit.model';
 })
 export class CourseEditFormComponent implements OnInit {
 
-  courseEditModel: CourseEdit = new CourseEdit();
-  
+  @Input() editResult: CourseEdit = new CourseEdit();
+  @Output() editResultChange: EventEmitter<CourseEdit> = new EventEmitter<CourseEdit>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public changed(): void {
+    this.editResultChange.emit(this.editResult);
+  }
 }

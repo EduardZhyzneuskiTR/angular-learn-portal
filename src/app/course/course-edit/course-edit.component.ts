@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseEdit } from 'src/app/models/course-edit.model';
 import { Course, ICourse } from 'src/app/models/course.model';
-import { CourseEditFormComponent } from '../course-edit-form/course-edit-form.component';
 import { CourseStorageService } from '../services/course-storage.service';
 
 @Component({
@@ -11,32 +10,38 @@ import { CourseStorageService } from '../services/course-storage.service';
   styleUrls: ['./course-edit.component.css']
 })
 export class CourseEditComponent implements OnInit {
-  @ViewChild(CourseEditFormComponent) courseEditForm: CourseEditFormComponent;
+  public editResult: CourseEdit;
   private currentId: number = NaN;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private coursesStorage: CourseStorageService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(p => {
       let id = Number(p["id"]);
-      this.currentId = id;
-      let course = this.coursesStorage.getItem(this.currentId);
-      this.courseEditForm.courseEditModel = this.toEditModel(course);
+      if (!Number.isNaN(id)) {
+        console.log("id: " + id);
+        this.currentId = id;
+        let course = this.coursesStorage.getItem(this.currentId);
+        this.editResult = this.toEditModel(course);
+      }
     });
     this.route.url.subscribe(url => {
       if (url[url.length - 1].path == "new") {
         this.currentId = NaN;
-        this.courseEditForm.courseEditModel = new CourseEdit();
+        console.log("new");
+        this.editResult = new CourseEdit();
+        this.editResult.duration = 0;
       }
     })
   }
 
   public save(): void {
-    let editResult = this.courseEditForm.courseEditModel;
-    let course = new Course(this.currentId, editResult.title, editResult.creationDate, editResult.duration, editResult.description);
+    let course = new Course(this.currentId, this.editResult.title, this.editResult.creationDate, this.editResult.duration, this.editResult.description);
     this.coursesStorage.upsertItem(course);
+    this.router.navigate(["courses", "list"]);
   }
 
   private toEditModel(course: ICourse) : CourseEdit {

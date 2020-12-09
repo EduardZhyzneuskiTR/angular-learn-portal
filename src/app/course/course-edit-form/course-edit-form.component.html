@@ -1,14 +1,14 @@
 <div class="row">
     <label for="title-edit">Title</label>
-    <input id="title-edit" [(ngModel)]="courseEditModel.title" class="form-control"/>
+    <input id="title-edit" [(ngModel)]="editResult.title" (ngModelChange)="changed()" class="form-control"/>
 </div>
 <div class="row">
     <label for="description-edit">Description</label>
-    <input id="description-edit" type="text-area" [(ngModel)]="courseEditModel.description" class="form-control"/>
+    <input id="description-edit" type="text-area" [(ngModel)]="editResult.description" (ngModelChange)="changed()" class="form-control"/>
 </div>
 <div class="row">
     <label for="creation-date-edit">Date</label>
-    <input id="creation-date-edit" type="text-area" [(ngModel)]="courseEditModel.creationDate" class="form-control"/>
+    <input id="creation-date-edit" type="text-area" [(ngModel)]="editResult.creationDate" (ngModelChange)="changed()" class="form-control"/>
 </div>
-<alp-course-edit-duration (duration) = "courseEditModel.duration = $event"></alp-course-edit-duration>
-<alp-course-edit-authors (authors) = "courseEditModel.authors = $event"></alp-course-edit-authors>
+<alp-course-edit-duration [(duration)] = "editResult.duration" (durationChange)="changed()"></alp-course-edit-duration>
+<alp-course-edit-authors (authors) = "editResult.authors = $event; changed()"></alp-course-edit-authors>

@@ -10,6 +10,9 @@ export class Course implements ICourse {
     get id() : number {
         return this._id;
     }
+    set id(value: number){
+        this._id = value;
+    }
 
     get title(): string {
         return this._title;
