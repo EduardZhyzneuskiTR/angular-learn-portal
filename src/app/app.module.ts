@@ -10,7 +10,6 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AuthModule } from './auth/auth.module';
 import { CourseModule } from './course/course.module';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
@@ -23,11 +22,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NotFoundComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     AuthModule,
-    CourseModule,
-    AppRoutingModule
+    CourseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

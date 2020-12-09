@@ -12,6 +12,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 @NgModule({
   declarations: [LoginFormComponent, UserHeaderComponent, UserProfileLinkComponent, LogOutComponent],
   exports: [ LoginFormComponent, UserHeaderComponent ],
-  imports: [ CommonModule, FormsModule, AuthRoutingModule ]
+  imports: [ AuthRoutingModule, CommonModule, FormsModule ]
 })
 export class AuthModule { }
