@@ -9,6 +9,9 @@ import { IndexComponent } from './index/index.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AuthModule } from './auth/auth.module';
 import { CourseModule } from './course/course.module';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,15 @@ import { CourseModule } from './course/course.module';
     HeaderComponent,
     FooterComponent,
     IndexComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AuthModule,
-    CourseModule
+    CourseModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

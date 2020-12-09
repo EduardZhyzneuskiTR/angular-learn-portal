@@ -11,12 +11,13 @@ import { CreationDateStylingDirective } from './directives/creation-date-styling
 import { DurationPipe } from './pipes/duration.pipe';
 import { CourseEditDurationComponent } from './course-edit-duration/course-edit-duration.component';
 import { CourseEditAuthorsComponent } from './course-edit-authors/course-edit-authors.component';
+import { CourseRoutingModule } from './course-routing.module';
 
 
 
 @NgModule({
   declarations: [CourseListComponent, CourseSearchComponent, CourseListItemComponent, CourseItemManagementPanelComponent, CourseEditComponent, CourseEditFormComponent, CreationDateStylingDirective, DurationPipe, CourseEditDurationComponent, CourseEditAuthorsComponent ],
   exports: [ CourseListComponent, CourseEditComponent ],
-  imports: [ CommonModule, FormsModule ]
+  imports: [ CourseRoutingModule, CommonModule, FormsModule ]
 })
 export class CourseModule { }

@@ -23,10 +23,14 @@ export class CourseStorageService {
      return this.courses.find(c => c.id == id);
    }
 
-   public updateItem(updatedItem: ICourse) {
+   public upsertItem(updatedItem: ICourse) {
      let index = this.courses.findIndex(c => c.id == updatedItem.id);
      if (index >= 0) {
       this.courses[index] = updatedItem;
+     }
+     else {
+       updatedItem.id = Math.max(...this.courses.map(c => c.id)) + 1;
+       this.courses.push(updatedItem);
      }
    }
 
