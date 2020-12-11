@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlpPageComponent } from 'src/alp-page-component';
 import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +15,7 @@ export class LoginFormComponent extends AlpPageComponent implements OnInit {
   public password: string;
   constructor(
     private authService: AuthService,
+    private router: Router,
     route: ActivatedRoute,
     breadcrumbsService: BreadcrumbsService) {
     super(route, breadcrumbsService);
@@ -25,6 +26,8 @@ export class LoginFormComponent extends AlpPageComponent implements OnInit {
   }
 
   public logIn(email: string, password: string) {
-    this.authService.logIn(email, password);
+    if (this.authService.logIn(email, password)) {
+      this.router.navigate([""]);
+    }
   }
 }

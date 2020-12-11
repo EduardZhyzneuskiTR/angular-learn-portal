@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
@@ -16,7 +17,8 @@ export const routes: Routes = [
 
     {
         path: "courses",
-        loadChildren: () => import("./course/course.module").then((m) => m.CourseModule)
+        loadChildren: () => import("./course/course.module").then((m) => m.CourseModule),
+        canActivateChild: [AuthGuard]
     },
 
     {
@@ -28,6 +30,7 @@ export const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, { enableTracing: true })],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [AuthGuard]
 })
 export class AppRoutingModule {}

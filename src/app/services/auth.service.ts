@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { IUser, User } from '../models/user.model';
 
 @Injectable({
@@ -6,19 +7,21 @@ import { IUser, User } from '../models/user.model';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  public logIn(email: string, password: string) {
+  public logIn(email: string, password: string): boolean {
     localStorage.setItem('email', email);
     localStorage.setItem('userId', "0");
+    return true;
   }
 
   public logOut() {
     localStorage.clear();
-    console.log("Logged out");
+    this.router.navigate([""]);
   }
 
   public isAuthenticated() : boolean {
+    console.log("checking");
     return localStorage.getItem('email') != null;
   }
 
