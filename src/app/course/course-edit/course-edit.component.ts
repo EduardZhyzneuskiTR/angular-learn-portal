@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlpPageComponent } from 'src/alp-page-component';
+import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
 import { CourseEdit } from 'src/app/models/course-edit.model';
 import { Course, ICourse } from 'src/app/models/course.model';
 import { CourseStorageService } from '../services/course-storage.service';
@@ -9,20 +11,23 @@ import { CourseStorageService } from '../services/course-storage.service';
   templateUrl: './course-edit.component.html',
   styleUrls: ['./course-edit.component.css']
 })
-export class CourseEditComponent implements OnInit {
+export class CourseEditComponent extends AlpPageComponent implements OnInit {
   public editResult: CourseEdit;
   private currentId: number = NaN;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private coursesStorage: CourseStorageService) { }
+    private coursesStorage: CourseStorageService,
+    route: ActivatedRoute,
+    breadcrumbsService: BreadcrumbsService) { 
+      super(route, breadcrumbsService);
+    }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.route.params.subscribe(p => {
       let id = Number(p["id"]);
       if (!Number.isNaN(id)) {
-        console.log("id: " + id);
         this.currentId = id;
         let course = this.coursesStorage.getItem(this.currentId);
         this.editResult = this.toEditModel(course);
@@ -31,7 +36,6 @@ export class CourseEditComponent implements OnInit {
     this.route.url.subscribe(url => {
       if (url[url.length - 1].path == "new") {
         this.currentId = NaN;
-        console.log("new");
         this.editResult = new CourseEdit();
         this.editResult.duration = 0;
       }

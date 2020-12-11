@@ -6,7 +6,8 @@ export const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
-        component: LoginFormComponent
+        component: LoginFormComponent,
+        data: { breadcrumbs: [ { linkName: "login", routerLink: [ "login" ]}]}
     }
 ]
 

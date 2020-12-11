@@ -1,1 +1,4 @@
-Courses
+<span *ngFor="let breadcrumb of currentBreadcrumbs; last as isLast">
+    <a [routerLink]="cleanLinkData(breadcrumb.routerLink)">{{breadcrumb.linkName}}</a>
+    <span *ngIf="!isLast">&nbsp;&gt;&nbsp;</span>
+</span>

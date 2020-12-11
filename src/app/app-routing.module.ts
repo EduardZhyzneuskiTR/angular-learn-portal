@@ -21,7 +21,8 @@ export const routes: Routes = [
 
     {
         path: "**",
-        component: NotFoundComponent
+        component: NotFoundComponent,
+        data: { breadcrumbs: [ {linkName: "Not found", routerLink: ["not-found"]}]}
     }
 ]
 

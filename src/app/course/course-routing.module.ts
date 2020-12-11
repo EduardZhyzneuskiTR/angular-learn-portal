@@ -12,15 +12,27 @@ export const routes: Routes = [
     },
     {
         path: "list",
-        component: CourseListComponent
+        component: CourseListComponent,
+        data: { breadcrumbs: [ 
+            { "linkName": "Courses", routerLink: ["courses"]},
+            { "linkName": "List", routerLink: ["courses", "list"]} 
+        ]}
     },
     {
         path: "new",
-        component: CourseEditComponent
+        component: CourseEditComponent,
+        data: { breadcrumbs: [ 
+            { "linkName": "Courses", routerLink: ["courses"]},
+            { "linkName": "Create", routerLink: ["courses", "new"]} 
+        ]}
     },
     {
         path: ":id",
-        component: CourseEditComponent
+        component: CourseEditComponent,
+        data: { breadcrumbs: [ 
+            { "linkName": "Courses", routerLink: ["courses"]},
+            { "linkName": "Edit", routerLink: ["courses", "id:"]} 
+        ]}
     }
 ]
 

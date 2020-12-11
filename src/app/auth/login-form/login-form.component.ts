@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AlpPageComponent } from 'src/alp-page-component';
+import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,13 +9,19 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent extends AlpPageComponent implements OnInit {
 
   public email: string;
   public password: string;
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    route: ActivatedRoute,
+    breadcrumbsService: BreadcrumbsService) {
+    super(route, breadcrumbsService);
+  }
 
   ngOnInit(): void {
+    super.ngOnInit();
   }
 
   public logIn(email: string, password: string) {
