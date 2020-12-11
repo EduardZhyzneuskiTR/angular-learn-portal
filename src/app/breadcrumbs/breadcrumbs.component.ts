@@ -29,7 +29,7 @@ export class BreadcrumbsComponent implements OnInit {
     let result = [];
     for (let fragment of routerLink) {
       if ((fragment as string)?.indexOf(":") != -1) {
-        let parameterValue = (fragment as string).split(":", 2)[1];
+        let parameterValue = (fragment as string).split(":", 2)[0];
         result.push(parameterValue);
       }
       else {

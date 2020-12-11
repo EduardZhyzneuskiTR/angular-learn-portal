@@ -31,7 +31,7 @@ export const routes: Routes = [
         component: CourseEditComponent,
         data: { breadcrumbs: [ 
             { "linkName": "Courses", routerLink: ["courses"]},
-            { "linkName": "Edit", routerLink: ["courses", "id:"]} 
+            { "linkName": "Edit", routerLink: ["courses", ":id"]} 
         ]}
     }
 ]

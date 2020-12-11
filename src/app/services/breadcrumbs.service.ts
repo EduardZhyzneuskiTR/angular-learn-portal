@@ -25,9 +25,9 @@ export class BreadcrumbsService {
     for (let breadcrumb of breadcrumbs) {
         breadcrumb.routerLink = breadcrumb.routerLink.map((fragment) => {
             if ((fragment as string).indexOf(":") != -1) {
-                let parts = (fragment as string).split(":");
-                let paramName = parts[0];
-                return `${paramName}:${params[paramName]}`;
+                let parts = (fragment as string).split(":", 2);
+                let paramName = parts[1];
+                return `${params[paramName]}:${paramName}`;
             }
             else {
                 return fragment;
