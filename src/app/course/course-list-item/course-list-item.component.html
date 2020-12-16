@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-body" [alpCreationDateStyling]="course.creationDate">
+    <div class="card-body" [alpCreationDateStyling]="course.date">
         <h4 class="card-title">{{course.name | uppercase}}</h4>
         <h5 class="card-subtitle"><span class="fas fa-clock"></span> {{course.length | duration}}. <span class="fas fa-date"></span> {{course.date | date}}</h5>
         <p class="card-text">{{course.description}}</p>

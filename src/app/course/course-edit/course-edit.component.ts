@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlpPageComponent } from 'src/alp-page-component';
 import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
 import { CourseEdit } from 'src/app/models/course-edit.model';
-import { Course, ICourse } from 'src/app/models/course.model';
+import { ICourse } from 'src/app/models/course.model';
 import { CourseStorageService } from '../services/course-storage.service';
 
 @Component({
@@ -42,9 +42,15 @@ export class CourseEditComponent extends AlpPageComponent implements OnInit {
   }
 
   public save(): void {
-    let course = new Course(this.currentId, this.editResult.title, this.editResult.creationDate, this.editResult.duration, this.editResult.description);
-    (this.currentId == NaN ? this.coursesStorage.insertItem(course) : this.coursesStorage.updateItem(course))
-      .subscribe(course => { this.router.navigate(["courses", "list"]) });
+    let course = { 
+      id: this.currentId, 
+      name: this.editResult.title, 
+      date: this.editResult.creationDate, 
+      length: this.editResult.duration, 
+      description: this.editResult.description
+    };
+    (Number.isNaN(this.currentId) ? this.coursesStorage.insertItem(course) : this.coursesStorage.updateItem(course))
+      .subscribe(_course => { this.router.navigate(["courses", "list"]) });
   }
 
   private toEditModel(course: ICourse) : CourseEdit {

@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Course, ICourse } from 'src/app/models/course.model';
+import { ICourse } from 'src/app/models/course.model';
 
 import { CourseListItemComponent } from './course-list-item.component';
 
 describe('CourseListItemComponent', () => {
   let component: CourseListItemComponent;
   let fixture: ComponentFixture<CourseListItemComponent>;
-  let course: ICourse = new Course(1, "Title", new Date(2020, 1, 1), 120, "Course");
+  let course: ICourse =  { id:1, name:"Title", date:new Date(2020, 1, 1), length:120, description:"Course" };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

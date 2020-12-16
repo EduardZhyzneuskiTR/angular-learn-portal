@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Course, ICourse } from 'src/app/models/course.model';
+import { ICourse } from 'src/app/models/course.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class CourseStorageService {
      return this.httpClient.patch<ICourse>(`${this.coursesUrl}/${updatedItem.id}`, updatedItem);
    }
 
-   public removeItem(id: number) {
-     this.httpClient.delete(`${this.coursesUrl}/${id}`);
+   public removeItem(id: number) : Observable<unknown>{
+     return this.httpClient.delete(`${this.coursesUrl}/${id}`);
    }
 }

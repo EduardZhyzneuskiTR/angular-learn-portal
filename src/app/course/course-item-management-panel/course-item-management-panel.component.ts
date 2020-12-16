@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICourse } from 'src/app/models/course.model';
 import { CourseStorageService } from '../services/course-storage.service';
 
@@ -10,13 +11,15 @@ import { CourseStorageService } from '../services/course-storage.service';
 export class CourseItemManagementPanelComponent implements OnInit {
   @Input() public course: ICourse;
 
-  constructor(private courseStorage: CourseStorageService) { }
+  constructor(
+    private courseStorage: CourseStorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
   public delete(id: number) {
-    this.courseStorage.removeItem(id);
+    this.courseStorage.removeItem(id).subscribe(_ => this.router.navigate([""]));
   }
 
 }
