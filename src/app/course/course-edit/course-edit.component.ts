@@ -29,8 +29,7 @@ export class CourseEditComponent extends AlpPageComponent implements OnInit {
       let id = Number(p["id"]);
       if (!Number.isNaN(id)) {
         this.currentId = id;
-        let course = this.coursesStorage.getItem(this.currentId);
-        this.editResult = this.toEditModel(course);
+        this.coursesStorage.getItem(this.currentId).subscribe(course => this.editResult = this.toEditModel(course));
       }
     });
     this.route.url.subscribe(url => {
@@ -44,16 +43,16 @@ export class CourseEditComponent extends AlpPageComponent implements OnInit {
 
   public save(): void {
     let course = new Course(this.currentId, this.editResult.title, this.editResult.creationDate, this.editResult.duration, this.editResult.description);
-    this.coursesStorage.upsertItem(course);
-    this.router.navigate(["courses", "list"]);
+    (this.currentId == NaN ? this.coursesStorage.insertItem(course) : this.coursesStorage.updateItem(course))
+      .subscribe(course => { this.router.navigate(["courses", "list"]) });
   }
 
   private toEditModel(course: ICourse) : CourseEdit {
     let result = new CourseEdit();
-    result.title = course.title;
+    result.title = course.name;
     result.description = course.description;
-    result.duration = course.duration;
-    result.creationDate = course.creationDate;
+    result.duration = course.length;
+    result.creationDate = course.date;
     return result;
   }
 }

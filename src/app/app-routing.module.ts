@@ -7,7 +7,8 @@ export const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
-        redirectTo: "courses"
+        redirectTo: "courses",
+        canActivate: [AuthGuard]
     },
 
     {
@@ -18,7 +19,8 @@ export const routes: Routes = [
     {
         path: "courses",
         loadChildren: () => import("./course/course.module").then((m) => m.CourseModule),
-        canActivateChild: [AuthGuard]
+        canActivateChild: [AuthGuard],
+        canActivate: [AuthGuard]
     },
 
     {

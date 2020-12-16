@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { CourseModule } from './course/course.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,19 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   imports: [
     AppRoutingModule,
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     AuthModule,
     CourseModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

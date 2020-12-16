@@ -13,7 +13,7 @@ import { AlpPageComponent } from 'src/alp-page-component';
 })
 export class CourseListComponent extends AlpPageComponent implements OnInit {
 
-  public courses: ICourse[];
+  public courses: ICourse[] = [];
   public showAdd: boolean;
 
   constructor(
@@ -25,11 +25,12 @@ export class CourseListComponent extends AlpPageComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.courses = this.courseStorage.getList();
+    this.courseStorage.getList().subscribe(courses => this.courses = courses);
   }
 
   public loadMore() {
-    console.log("Load more!");
+    console.log(this.courses.length);
+    this.courseStorage.getList(this.courses.length, 5).subscribe(loaded => this.courses.push(...loaded));
   }
 
 }

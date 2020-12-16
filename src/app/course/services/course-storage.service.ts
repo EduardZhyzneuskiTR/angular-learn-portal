@@ -1,43 +1,34 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Course, ICourse } from 'src/app/models/course.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseStorageService {
-  private courses: ICourse[];
-  
-  constructor() {
-    this.courses= [
-      new Course(1, "Angular", new Date(2019, 0, 1), 720, "Cool angular"),
-      new Course(2, "React", new Date(2020, 11, 1), 900, "Cool react"),
-      new Course(3, "Typescript", new Date(2020, 10, 9), 150, "Cool typescript")
-    ];
+  private coursesUrl: string = "http://localhost:3004/courses";
+
+  constructor(private httpClient: HttpClient) { }
+
+   public getList(start: number = 0, count: number = 10): Observable<ICourse[]> {
+     console.log(`Starting from ${start}, getting ${count}`);
+     return this.httpClient.get<ICourse[]>(`${this.coursesUrl}?start=${start}&count=${count}`);
    }
 
-   public getList(): ICourse[] {
-     return this.courses;
+   public getItem(id: number): Observable<ICourse> {
+     return this.httpClient.get<ICourse>(`${this.coursesUrl}/${id}`);
    }
 
-   public getItem(id: number): ICourse {
-     return this.courses.find(c => c.id == id);
+   public insertItem(newItem: ICourse): Observable<ICourse> {
+     return this.httpClient.post<ICourse>(this.coursesUrl, newItem);
    }
 
-   public upsertItem(updatedItem: ICourse) {
-     let index = this.courses.findIndex(c => c.id == updatedItem.id);
-     if (index >= 0) {
-      this.courses[index] = updatedItem;
-     }
-     else {
-       updatedItem.id = Math.max(...this.courses.map(c => c.id)) + 1;
-       this.courses.push(updatedItem);
-     }
+   public updateItem(updatedItem: ICourse): Observable<ICourse> {
+     return this.httpClient.patch<ICourse>(`${this.coursesUrl}/${updatedItem.id}`, updatedItem);
    }
 
    public removeItem(id: number) {
-     let index = this.courses.findIndex(c => c.id == id);
-     if (index >= 0) {
-      this.courses.splice(index, 1);
-     }
+     this.httpClient.delete(`${this.coursesUrl}/${id}`);
    }
 }

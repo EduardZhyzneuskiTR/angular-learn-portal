@@ -1,8 +1,8 @@
 export interface ICourse {
     id: number;
-    title: string;
-    creationDate: Date;
-    duration: number;
+    name: string;
+    date: Date;
+    length: number;
     description: string;
 }
 
@@ -14,16 +14,16 @@ export class Course implements ICourse {
         this._id = value;
     }
 
-    get title(): string {
+    get name(): string {
         return this._title;
     }
 
-    get creationDate(): Date {
+    get date(): Date {
         return this._creationDate;
     }
 
-    get duration(): number {
-        return this._duration;
+    get length(): number {
+        return this._length;
     }
 
     get description(): string {
@@ -34,7 +34,7 @@ export class Course implements ICourse {
         private _id: number,
         private _title: string,
         private _creationDate: Date,
-        private _duration: number,
+        private _length: number,
         private _description: string
     ) {}
 }

@@ -25,8 +25,8 @@ export class LoginFormComponent extends AlpPageComponent implements OnInit {
     super.ngOnInit();
   }
 
-  public logIn(email: string, password: string) {
-    if (this.authService.logIn(email, password)) {
+  public async logIn(email: string, password: string) {
+    if (await this.authService.logIn(email, password)) {
       this.router.navigate([""]);
     }
   }

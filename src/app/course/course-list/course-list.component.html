@@ -3,5 +3,5 @@
     <button class="btn btn-success" routerLink="../new"><span class="fas fa-plus"></span> Add course</button>
     <alp-course-list-item *ngFor="let course of courses" [course]="course"></alp-course-list-item>
     <span *ngIf="courses.length == 0">No courses. Here is link: </span>
-    <a href="#" id="load-more" (click)="loadMore()">Load more</a>
+    <button class="btn btn-success" id="load-more" (click)="loadMore()">Load more</button>
 </div>
