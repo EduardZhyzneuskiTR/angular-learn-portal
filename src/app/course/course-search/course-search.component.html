@@ -1,4 +1,3 @@
 <div class="card-body">
-    <input id="search-input" type="text" class="form-control" [(ngModel)]="searchText"/>
-    <button id="search-button" type="button" class="btn btn-primary" (click)="onClick()" >Search</button>
+    <input id="search-input" type="text" class="form-control" (keyup)="keyUp($event)"/>
 </div>
