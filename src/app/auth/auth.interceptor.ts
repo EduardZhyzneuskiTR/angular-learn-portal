@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -11,11 +11,12 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {}
+  constructor(private injector: Injector) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!request.url.endsWith("auth/login")) {
-      let token = this.authService.getCurrentToken();
+      let authService = this.injector.get(AuthService);
+      let token = authService.getCurrentToken();
       request.headers.append("Authorization", `Bearer ${token}`);
     }
     return next.handle(request);

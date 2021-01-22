@@ -40,7 +40,6 @@ export class CourseListComponent extends AlpPageComponent implements OnInit, OnD
   }
 
   public loadMore() {
-    console.log(this.courses.length);
     this.courseStorage.getList(this.courses.length, 5, this.currentSearch).subscribe(loaded => this.courses.push(...loaded));
   }
 }

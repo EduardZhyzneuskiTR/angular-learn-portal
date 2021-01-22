@@ -13,6 +13,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import authReducer from './store/auth/auth-store.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth/auth-store.effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     BrowserModule,
     FormsModule,
     AuthModule,
-    CourseModule
+    CourseModule,
+    StoreModule.forRoot({auth: authReducer}),
+    EffectsModule.forRoot([AuthEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
     {

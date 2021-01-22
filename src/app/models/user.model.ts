@@ -23,3 +23,16 @@ export class User implements IUser {
         private _secondName: string
     ) {}
 }
+
+export interface TokenResponse {
+    token: string;
+  }
+  
+export interface UserInfo {
+    name: UserName
+}
+
+export interface UserName {
+    first: string;
+    last: string;
+}

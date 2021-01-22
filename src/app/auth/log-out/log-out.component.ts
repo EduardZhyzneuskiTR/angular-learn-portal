@@ -18,7 +18,6 @@ export class LogOutComponent implements OnInit {
 
   public logOut() {
     this.authService.logOut();
-    this.router.navigate(["login"]);
   }
 
 }

@@ -1,70 +1,47 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { initialLoad, login, logOut } from '../store/auth/auth-store.actions';
+import { AuthState } from '../store/auth/auth-store.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private get currentToken(): string {
-    return localStorage.getItem("authToken");
-  }
-  private set currentToken(value: string) {
-    console.log(`Auth token now is ${value}`);
-    localStorage.setItem("authToken", value);
+  private _isAuthenticated: boolean = false;
+  private _token: string = "";
+
+  constructor(private authStore: Store<{auth: AuthState}>) {
+    this.authStore.select(state => state.auth.addressedLocalStorage).subscribe(initiated => {
+      if (!initiated) {
+        this.authStore.dispatch(initialLoad());
+      }
+    });
+    this.authStore.select(state => state.auth.loggedIn).subscribe(loggedIn => { 
+      this._isAuthenticated = loggedIn; 
+    });
+    this.authStore.select(state => state.auth.token).subscribe(token => {
+      this._token = token !== undefined ? token : "";
+    });
   }
 
-  constructor(
-    private httpClient: HttpClient) { 
-      if (localStorage.getItem("authToken") == undefined)
-        localStorage.setItem("authToken", "");
-    }
-
-  public async logIn(email: string, password: string): Promise<boolean> {
-    let result = false;
-    await this.httpClient.post<TokenResponse>("http://localhost:3004/auth/login", { login: email, password: password }).toPromise()
-      .then(tr => {
-        this.currentToken = tr.token;
-        result = true;
-      })
-      .catch(error => {
-        console.log(JSON.stringify(error));
-        result = false;
-      });
-    return result;
+  public logIn(email: string, password: string): void {
+    this.authStore.dispatch(login({ payload: { login: email, password: password }}));
   }
 
   public logOut() {
-    this.currentToken = "";
+    this.authStore.dispatch(logOut());
   }
 
   public isAuthenticated() : boolean {
-    return this.currentToken != "";
+    return this._isAuthenticated;
   }
 
   public getCurrentToken(): string {
-    return this.currentToken;
+    return this._token;
   }
 
   public getUserInfo() : Observable<string> {
-    if (this.isAuthenticated())
-      return this.httpClient.post<UserInfo>("http://localhost:3004/auth/userinfo", { token: this.currentToken })
-        .pipe(map(user => `${user.name.first} ${user.name.last}`));
-    else
-      return new Observable(subscriber => subscriber.next("Not logged in"));
+    return this.authStore.select(state => state.auth.user);
   }
-}
-
-interface TokenResponse {
-  token: string;
-}
-
-interface UserInfo {
-  name: UserName
-}
-
-interface UserName {
-  first: string;
-  last: string;
 }

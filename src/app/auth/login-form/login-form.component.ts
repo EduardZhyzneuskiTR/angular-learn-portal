@@ -15,7 +15,6 @@ export class LoginFormComponent extends AlpPageComponent implements OnInit {
   public password: string;
   constructor(
     private authService: AuthService,
-    private router: Router,
     route: ActivatedRoute,
     breadcrumbsService: BreadcrumbsService) {
     super(route, breadcrumbsService);
@@ -26,8 +25,6 @@ export class LoginFormComponent extends AlpPageComponent implements OnInit {
   }
 
   public async logIn(email: string, password: string) {
-    if (await this.authService.logIn(email, password)) {
-      this.router.navigate([""]);
-    }
+    this.authService.logIn(email, password)
   }
 }
