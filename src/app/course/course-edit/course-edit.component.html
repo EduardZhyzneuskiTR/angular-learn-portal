@@ -1,10 +1,58 @@
 <div class="card">
     <div class="card-header">New course</div>
     <div class="card-body">
-        <alp-course-edit-form [(editResult)]="editResult"></alp-course-edit-form>
-        <div class="row">
-            <button class="btn btn-success" (click)="save()">Save</button>
-            <button class="btn btn-success" routerLink="../list">Cancel</button>
-        </div>        
+        <form [formGroup]="courseEditForm" (ngSubmit)="save()">
+            <div class="row">
+                <label for="title-edit">Title</label>
+                <input id="title-edit" formControlName="title" class="form-control"/>
+            </div>
+            <div *ngIf="title.invalid && (title.dirty || title.touched) && title.errors.required" class="row alert alert-danger">
+                Title is required.
+            </div>
+            <div *ngIf="title.invalid && (title.dirty || title.touched) && title.errors.maxlength" class="row alert alert-danger">
+                Title is too long.
+            </div>
+
+            <div class="row">
+                <label for="description-edit">Description</label>
+                <input id="description-edit" type="text-area" formControlName="description" class="form-control"/>
+            </div>
+            <div *ngIf="description.invalid && (description.dirty || description.touched) && description.errors.required" class="row alert alert-danger">
+                Description is required.
+            </div>
+            <div *ngIf="description.invalid && (description.dirty || description.touched) && description.errors.maxlength" class="row alert alert-danger">
+                Description is too long.
+            </div>
+
+            <div class="row">
+                <label for="creation-date-edit">Date</label>
+                <input id="creation-date-edit" formControlName="date" class="form-control"/>
+            </div>
+            <div *ngIf="date.invalid && (date.dirty || date.touched) && date.errors.required" class="row alert alert-danger">
+                Date for this course is required (MM/DD/YYYY).
+            </div>
+            <div *ngIf="date.invalid && (date.dirty || date.touched) && date.errors.pattern" class="row alert alert-danger">
+                Date for this course should have proper format (MM/DD/YYYY).
+            </div>
+
+            <alp-course-edit-duration formControlName="duration"></alp-course-edit-duration>
+            <div *ngIf="duration.invalid && duration.errors.shouldBeNumber" class="row alert alert-danger">
+                Please, enter number.
+            </div>
+            <div *ngIf="duration.invalid && duration.errors.tooLong" class="row alert alert-danger">
+                This course too long.
+            </div>
+
+            <alp-course-edit-authors formControlName="authors"></alp-course-edit-authors>
+            <div *ngIf="authors.invalid && authors.errors.required" class="row alert alert-danger">
+                Honestly, it's not connected to backend (skipped in previous modules). Just write here something, please. Don't know why, but implemented NG_VALUE_ACCESSOR for this.
+            </div>
+
+            <div class="row">
+                <button class="btn btn-success" type="submit">Save</button>
+                <button class="btn btn-success" routerLink="../list">Cancel</button>
+            </div>
+        </form>
+    
     </div>
 </div>

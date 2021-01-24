@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -34,6 +34,7 @@ import { AuthEffects } from './store/auth/auth-store.effects';
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthModule,
     CourseModule,
     StoreModule.forRoot({auth: authReducer}),
